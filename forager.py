@@ -26,19 +26,24 @@ cnt = input(f'How many times do you want to create a mistype for each domain? [{
 if cnt != '':
     MISFIRE_COUNT = int(cnt)
 
+print('Loading TLD list...')
+TLD_LIST = json.load(open('top_tlds.json', 'r'))
+
 for website in WEBSITES:
     for i in range(MISFIRE_COUNT):
-        delim = random.randint(0, (len(website) - 1))
-        layout_index = Helper.QWERTY_LAYOUT.index(website[delim])
-        dlm = (layout_index - random.choice([1, -1]))
-        if dlm < 0:
-            dlm = 0
-        if dlm > 25:
-            dlm = 25
-        dlm = Helper.QWERTY_LAYOUT[dlm]
-        misfired = website[0:delim] + dlm + website[(delim + 1):]
-        if misfired not in ALL_DOMAINS:
-            ALL_DOMAINS.append(misfired)
+        for tld in TLD_LIST:
+            delim = random.randint(0, (len(website) - 1))
+            layout_index = Helper.QWERTY_LAYOUT.index(website[delim])
+            dlm = (layout_index - random.choice([1, -1]))
+            if dlm < 0:
+                dlm = 0
+            if dlm > 25:
+                dlm = 25
+            dlm = Helper.QWERTY_LAYOUT[dlm]
+            misfired = website[0:delim] + dlm + website[(delim + 1):] + '.' + tld
+            if misfired not in ALL_DOMAINS:
+                ALL_DOMAINS.append(misfired)
 
 clear_screen()
+open('domains.json', 'w').write(json.dumps(ALL_DOMAINS))
 print(f'Foraged {Fore.LIGHTGREEN_EX}{str(len(ALL_DOMAINS))}{Fore.RESET} websites.')
