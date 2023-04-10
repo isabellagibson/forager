@@ -1,8 +1,6 @@
 [
-    "youtube",
     "netflix",
     "discord",
-    "live",
     "twitter",
     "google",
     "microsoft",
@@ -13,5 +11,20 @@
     "amazon",
     "facebook",
     "yandex",
-    "duckduckgo"
+    "duckduckgo",
+    "homedepot",
+    "samsung",
+    "bestbuy",
+    "geeksquad",
+    "msn",
+    "ask",
+    "aol",
+    "yahoo",
+    "bing",
+    "yandex",
+    "youtube",
+    "pornhub",
+    "live",
+    "outlook",
+    "office"
 ]
